@@ -1,0 +1,20 @@
+[package]
+name = "gitscanr"
+version = "0.1.0"
+authors = ["Ivan Torres Fally <ivantf@gmail.com>"]
+edition = "2018"
+description = "A simple git repository explorer"
+documentation = "https://github.com/bilbu/gitscanr"
+readme = "README.md"
+homepage = "https://github.com/bilbu/gitscanr"
+repository = "https://github.com/bilbu/gitscanr"
+license = "MIT"
+keywords = ["git", "scan"]
+categories = ["command-line-utilities", "filesystem"]
+build = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+git2 = "~0.13.12"
+clap = "~2.33.3"
