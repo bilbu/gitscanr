@@ -1,17 +1,17 @@
-use clap::{crate_authors, crate_version, App, Arg};
+use clap::{Arg, Command};
 use git2::Repository;
-use std::{path::Path, process::exit};
+use std::{fs, path::Path, process::exit};
 
 mod constants;
 mod utils;
 
 fn main() {
-    let matches = App::new(constants::package::NAME)
-        .version(crate_version!())
-        .author(crate_authors!())
+    let matches = Command::new(constants::package::NAME)
+        .version(clap::crate_version!())
+        .author(clap::crate_authors!())
         .about(constants::package::DESCRIPTION)
         .arg(
-            Arg::with_name(constants::argument::DIRECTORY_LONG)
+            Arg::new(constants::argument::DIRECTORY_LONG)
                 .index(1)
                 .takes_value(true)
                 .help(constants::argument::DIRECTORY_HELP)
@@ -19,7 +19,7 @@ fn main() {
                 .required(false),
         )
         .arg(
-            Arg::with_name(constants::argument::RECURSIVE_LONG)
+            Arg::new(constants::argument::RECURSIVE_LONG)
                 .long(constants::argument::RECURSIVE_LONG)
                 .short(constants::argument::RECURSIVE_SHORT)
                 .help(constants::argument::RECURSIVE_HELP)
@@ -39,19 +39,29 @@ fn main() {
         false => utils::bail(format!("Directory {} does not exist", directory)),
     };
 
-    let repository = match Repository::open(directory) {
-        Ok(r) => r, //repository = r,
-        Err(e) => {
-            utils::bail(format!("Failed to open {}: {}", directory, e));
-            exit(constants::exit::FAILURE)
-        }
-    };
+    if !recurse {
+        let repository = match Repository::open(directory) {
+            Ok(r) => r, //repository = r,
+            Err(e) => {
+                utils::bail(format!("Failed to open {}: {}", directory, e));
+                exit(constants::exit::FAILURE)
+            }
+        };
 
-    println!(
-        "{} state={:?}",
-        repository.path().display(),
-        repository.state()
-    );
+        println!(
+            "{} state={:?}",
+            repository.path().display(),
+            repository.state()
+        );
+    } else {
+        println!("Recursively scanning...");
+        for entry in fs::read_dir(directory).unwrap() {
+            let entry = entry.unwrap();
+            if entry.path().is_dir() {
+                println!("{:?}", entry);
+            }
+        }
+    }
 
     exit(constants::exit::SUCCESS)
 }
