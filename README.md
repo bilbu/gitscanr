@@ -1,5 +1,6 @@
 [![Latest Version][crate-image]][crate-link]
 [![Build Status][build-image]][build-link]
+![MSRV][rustc-image]
 [![MIT licensed][license-image]][license-link]
 
 # gitscanr
