@@ -12,7 +12,11 @@ use std::process::exit;
 ///
 /// utils::bail("Something bad happened.");
 /// ```
-pub fn bail(message: String) {
+pub fn bail(message: &str) {
     eprintln!("{}", message);
     exit(constants::exit::FAILURE); // TODO: decorate process::exit to encompass constants::exit::*
+}
+
+pub fn warn(message: &str) {
+    eprintln!("{}", message);
 }
