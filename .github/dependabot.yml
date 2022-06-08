@@ -1,4 +1,5 @@
 version: 2
+
 updates:
   - package-ecosystem: "cargo"
     directory: "/"
@@ -7,5 +8,12 @@ updates:
     commit-message:
       prefix: "[SEC]"
       include: "scope"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+
   - assignees:
     - "bilbu"
