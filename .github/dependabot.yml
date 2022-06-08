@@ -1,11 +1,11 @@
 version: 2
 updates:
-  - package-ecosystem: "cargo"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    commit-message:
-      prefix: "[SEC]"
-      include: "scope"
-  - assignees:
-    - "bilbu"
+- package-ecosystem: "cargo"
+  directory: "/"
+  schedule:
+    interval: "daily"
+  commit-message:
+    prefix: "[SEC]"
+    include: "scope"
+- assignees:
+  - "bilbu"
