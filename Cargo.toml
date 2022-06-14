@@ -17,5 +17,5 @@ build         = false
 
 [dependencies]
 git2    = "^0.14.4"
-clap    = { version = "^3.1.18", features = ["derive", "cargo"] }
+clap    = { version = "^3.2.1", features = ["derive", "cargo"] }
 walkdir = "^2.3.2"
