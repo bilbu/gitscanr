@@ -1,5 +1,6 @@
 [![Latest Version][crate-image]][crate-link]
 [![Security Status][security-image]][security-link]
+[![Build Status][pipeline-image]][pipeline-link]
 ![MSRV][rustc-image]
 [![MIT licensed][license-image]][license-link]
 
@@ -12,6 +13,8 @@ A simple git repository explorer.
 [crate-link]: https://crates.io/crates/gitscanr
 [security-image]: https://github.com/bilbu/gitscanr/actions/workflows/security.yml/badge.svg
 [security-link]: https://github.com/bilbu/gitscanr/actions/workflows/security.yml/
+[pipeline-image]: https://github.com/bilbu/gitscanr/actions/workflows/pipeline.yml/badge.svg
+[pipeline-link]: https://github.com/bilbu/gitscanr/actions/workflows/pipeline.yml/
 [license-image]: https://img.shields.io/crates/l/gitscanr
 [rustc-image]: https://img.shields.io/badge/rustc-1.61.0+-blue.svg
 [license-link]: https://raw.githubusercontent.com/bilbu/gitscanr/master/LICENSE
