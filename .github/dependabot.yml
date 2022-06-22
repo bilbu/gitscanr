@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "daily"
     commit-message:
-      prefix: "[SEC]"
+      prefix: "[SEC] "
       include: "scope"
     assignees:
       - "bilbu"
