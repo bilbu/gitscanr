@@ -1,6 +1,7 @@
 use std::{path::Path, process::exit};
 
 use clap::{Arg, Command};
+use git2::Repository;
 use walkdir::WalkDir;
 
 mod constants;
