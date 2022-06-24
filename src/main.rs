@@ -1,6 +1,7 @@
-use clap::{Arg, Command};
-use git2::Repository;
 use std::{path::Path, process::exit};
+
+use clap::{Arg, Command};
+use git2::{BranchType, Repository};
 use walkdir::WalkDir;
 
 mod constants;
@@ -58,7 +59,34 @@ fn analyze_directory(dir: &Path) {
             println!("Scanning [{}]...", dir.to_str().unwrap());
 
             match Repository::open(dir) {
-                Ok(repo) => println!("{} state={:?}", repo.path().display(), repo.state()),
+                Ok(repo) => {
+                    println!("{} state={:?}", repo.path().display(), repo.state());
+                    println!("bare:{}", repo.is_bare());
+
+                    match repo.config() {
+                        Ok(config) => {
+                            for entry in &config.entries(None).unwrap() {
+                                let entry = entry.unwrap();
+
+                                println!(
+                                    "config {} => {}",
+                                    entry.name().unwrap(),
+                                    entry.value().unwrap()
+                                );
+                            }
+                        }
+                        Err(_) => todo!(),
+                    }
+
+                    match repo.branches(None) {
+                        Ok(branches) => {
+                            for branch in branches.enumerate() {
+                                println!("branch #{}: {:?}", branch.0, branch.1.unwrap().0.name());
+                            }
+                        }
+                        Err(e) => eprintln!("{}", e),
+                    }
+                }
                 Err(e) => {
                     eprintln!(
                         "Failed to open repository [{}]: {}",
