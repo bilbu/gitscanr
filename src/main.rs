@@ -2,11 +2,16 @@ use std::{path::Path, process::exit};
 
 use clap::{Arg, Command};
 use git2::Repository;
+use log::{debug, error, info};
 use walkdir::WalkDir;
+
+extern crate pretty_env_logger;
 
 mod constants;
 
 fn main() {
+    pretty_env_logger::init();
+
     let args = Command::new(constants::package::NAME)
         .version(clap::crate_version!())
         .author(clap::crate_authors!())
@@ -36,13 +41,13 @@ fn main() {
         // most common use case would be to scan the current directory or a specific one
         analyze_directory(Path::new(dir));
     } else {
-        println!("Recursively scanning [{}]...", dir);
+        info!("Recursively scanning [{}]...", dir);
 
         for entry in WalkDir::new(dir).min_depth(1).max_depth(1) {
             match entry {
                 Ok(entry) => analyze_directory(entry.path()),
                 Err(error) => {
-                    eprintln!("Could not walk directory [{}]: {} ", dir, error);
+                    error!("Could not walk directory [{}]: {} ", dir, error);
                     exit(constants::exit::FAILURE);
                 }
             }
@@ -56,19 +61,19 @@ fn main() {
 fn analyze_directory(dir: &Path) {
     match dir.exists() && dir.is_dir() {
         true => {
-            println!("Scanning [{}]...", dir.to_str().unwrap());
+            info!("Scanning [{}]...", dir.to_str().unwrap());
 
             match Repository::open(dir) {
                 Ok(repo) => {
-                    println!("{} state={:?}", repo.path().display(), repo.state());
-                    println!("bare:{}", repo.is_bare());
+                    debug!("{} state={:?}", repo.path().display(), repo.state());
+                    debug!("bare:{}", repo.is_bare());
 
                     match repo.config() {
                         Ok(config) => {
                             for entry in &config.entries(None).unwrap() {
                                 let entry = entry.unwrap();
 
-                                println!(
+                                debug!(
                                     "config {} => {}",
                                     entry.name().unwrap(),
                                     entry.value().unwrap()
@@ -80,15 +85,16 @@ fn analyze_directory(dir: &Path) {
 
                     match repo.branches(None) {
                         Ok(branches) => {
-                            for branch in branches.enumerate() {
-                                println!("branch #{}: {:?}", branch.0, branch.1.unwrap().0.name());
+                            for (i, val) in branches.enumerate() {
+                                let (branch, _) = val.unwrap();
+                                debug!("branch #{}: {:?}", i, branch.name());
                             }
                         }
                         Err(e) => eprintln!("{}", e),
                     }
                 }
                 Err(e) => {
-                    eprintln!(
+                    error!(
                         "Failed to open repository [{}]: {}",
                         dir.to_str().unwrap(),
                         e
@@ -96,7 +102,7 @@ fn analyze_directory(dir: &Path) {
                 }
             };
         }
-        false => eprintln!(
+        false => error!(
             "Directory [{}] does not exist or is not a directory",
             dir.to_str().unwrap()
         ),
