@@ -7,6 +7,19 @@
 # gitscanr
 A simple git repository explorer.
 
+```
+USAGE:
+    gitscanr [OPTIONS] [directory]
+
+ARGS:
+    <directory>    The directory to scan [default: ./]
+
+OPTIONS:
+    -h, --help         Print help information
+    -r, --recursive    When [directory] is the root of multiple git reopsitories
+    -V, --version      Print version information
+```
+
 [//]: # (badges)
 
 [crate-image]: https://buildstats.info/crate/gitscanr
