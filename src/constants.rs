@@ -6,6 +6,7 @@ pub mod package {
 pub mod default {
     pub const DIRECTORY: &str = "./";
     pub const RECURSE: bool = false;
+    pub const DEBUG: &str = "TRACE";
 }
 
 pub mod argument {
@@ -14,6 +15,9 @@ pub mod argument {
     pub const RECURSIVE_LONG: &str = "recursive";
     pub const RECURSIVE_SHORT: char = 'r';
     pub const RECURSIVE_HELP: &str = "When [directory] is the root of multiple git reopsitories";
+    pub const DEBUG_LONG: &str = "debug";
+    pub const DEBUG_SHORT: char = 'd';
+    pub const DEBUG_HELP: &str = "Enable debug output";
 }
 
 // TODO: work around exit codes' portability cross platform

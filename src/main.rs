@@ -1,4 +1,4 @@
-use std::{path::Path, process::exit};
+use std::{env, path::Path, process::exit};
 
 use clap::{Arg, Command};
 use git2::Repository;
@@ -9,33 +9,51 @@ extern crate pretty_env_logger;
 
 mod constants;
 
-fn main() {
-    pretty_env_logger::init();
+use constants::{
+    argument::{
+        DEBUG_HELP, DEBUG_LONG, DEBUG_SHORT, DIRECTORY_HELP, DIRECTORY_LONG, RECURSIVE_HELP,
+        RECURSIVE_LONG, RECURSIVE_SHORT,
+    },
+    default::{DEBUG, DIRECTORY, RECURSE},
+    package::{DESCRIPTION, NAME},
+};
 
-    let args = Command::new(constants::package::NAME)
+fn main() {
+    let args = Command::new(NAME)
         .version(clap::crate_version!())
         .author(clap::crate_authors!())
-        .about(constants::package::DESCRIPTION)
+        .about(DESCRIPTION)
         .arg(
-            Arg::new(constants::argument::DIRECTORY_LONG)
+            Arg::new(DIRECTORY_LONG)
                 .takes_value(true)
-                .help(constants::argument::DIRECTORY_HELP)
-                .default_value(constants::default::DIRECTORY)
+                .help(DIRECTORY_HELP)
+                .default_value(DIRECTORY)
                 .required(false),
         )
         .arg(
-            Arg::new(constants::argument::RECURSIVE_LONG)
-                .long(constants::argument::RECURSIVE_LONG)
-                .short(constants::argument::RECURSIVE_SHORT)
-                .help(constants::argument::RECURSIVE_HELP)
+            Arg::new(RECURSIVE_LONG)
+                .long(RECURSIVE_LONG)
+                .short(RECURSIVE_SHORT)
+                .help(RECURSIVE_HELP)
+                .takes_value(false),
+        )
+        .arg(
+            Arg::new(DEBUG_LONG)
+                .long(DEBUG_LONG)
+                .short(DEBUG_SHORT)
+                .help(DEBUG_HELP)
                 .takes_value(false),
         )
         .get_matches();
 
-    let recurse =
-        args.is_present(constants::argument::RECURSIVE_LONG) || constants::default::RECURSE;
+    if args.is_present(DEBUG_LONG) {
+        env::set_var("RUST_LOG", DEBUG);
+    }
+    pretty_env_logger::init();
 
-    let dir = args.value_of(constants::argument::DIRECTORY_LONG).unwrap();
+    let recurse = args.is_present(RECURSIVE_LONG) || RECURSE;
+
+    let dir = args.value_of(DIRECTORY_LONG).unwrap();
 
     if !recurse {
         // most common use case would be to scan the current directory or a specific one

@@ -30,6 +30,6 @@ OPTIONS:
 [pipeline-image]: https://github.com/bilbu/gitscanr/actions/workflows/pipeline.yml/badge.svg
 [pipeline-link]: https://github.com/bilbu/gitscanr/actions/workflows/pipeline.yml/
 [license-image]: https://img.shields.io/crates/l/gitscanr
-[rustc-image]: https://img.shields.io/badge/rustc-1.62.0+-blue.svg
+[rustc-image]: https://img.shields.io/badge/rustc-1.62.1+-blue.svg
 [license-link]: https://raw.githubusercontent.com/bilbu/gitscanr/master/LICENSE
 [dependabot-image]: https://badgen.net/github/dependabot/bilbu/gitscanr
