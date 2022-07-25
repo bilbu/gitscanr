@@ -16,6 +16,7 @@ ARGS:
     <directory>    The directory to scan [default: ./]
 
 OPTIONS:
+    -d, --debug        Enable debug output
     -h, --help         Print help information
     -r, --recursive    When [directory] is the root of multiple git reopsitories
     -V, --version      Print version information
