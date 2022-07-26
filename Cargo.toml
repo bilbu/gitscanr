@@ -1,6 +1,6 @@
 [package]
 name          = "gitscanr"
-version       = "0.2.0"
+version       = "0.2.1"
 authors       = ["Ivan Torres Fally <bilbu@pm.me>"]
 edition       = "2021"
 description   = "A simple git repository explorer"
