@@ -16,7 +16,7 @@ build         = false
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-git2              = "^0.14.4"
+git2              = "^0.15.0"
 clap              = { version = "^3.2.15", features = ["derive", "cargo"] }
 walkdir           = "^2.3.2"
 log               = "^0.4.17"
