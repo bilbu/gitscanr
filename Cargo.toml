@@ -17,7 +17,7 @@ build         = false
 
 [dependencies]
 git2              = "^0.15.0"
-clap              = { version = "^3.2.22", features = ["derive", "cargo"] }
+clap              = { version = "^4.0.12", features = ["derive", "cargo"] }
 walkdir           = "^2.3.2"
 log               = "^0.4.17"
 pretty_env_logger = "^0.4.0"
