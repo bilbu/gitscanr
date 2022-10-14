@@ -88,7 +88,9 @@ fn analyze_directory(dir: &Path) {
 
                     match repo.config() {
                         Ok(config) => {
-                            while let Some(entry) = config.entries(None).unwrap().next() {
+                            let mut entries = config.entries(None).unwrap();
+
+                            while let Some(entry) = entries.next() {
                                 let entry = entry.unwrap();
 
                                 debug!(
