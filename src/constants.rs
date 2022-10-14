@@ -6,10 +6,11 @@ pub mod package {
 pub mod default {
     pub const DIRECTORY: &str = "./";
     pub const RECURSE: bool = false;
-    pub const DEBUG: &str = "TRACE";
+    pub const LOG_LVL: &str = "INFO";
+    pub const LOG_LVL_DEBUG: &str = "TRACE";
 }
 
-pub mod argument {
+pub mod arg {
     pub const DIRECTORY_LONG: &str = "directory"; // TODO: reuse/concatenate somehow below
     pub const DIRECTORY_HELP: &str = "The directory to scan";
     pub const RECURSIVE_LONG: &str = "recursive";
