@@ -10,3 +10,6 @@ updates:
       include: "scope"
     assignees:
       - "bilbu"
+    ignore:
+      - dependency-name: "clap"
+        update-types: ["version-update:semver-major"]
