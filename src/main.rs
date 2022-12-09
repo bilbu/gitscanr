@@ -67,7 +67,7 @@ fn main() {
         }
     }
 
-    exit(constants::exit::SUCCESS)
+    exit(constants::exit::SUCCESS) // TODO https://doc.rust-lang.org/stable/std/process/struct.ExitCode.html#examples
 }
 
 /// Scans the given `dir` for git repository information.
