@@ -12,4 +12,4 @@ It relies on [Cargo Clippy](https://github.com/rust-lang/rust-clippy) and [Cargo
 
 ## Reporting a Vulnerability
 
-Feel free to contact me via [Email](mailto:bilbu@pm.me).
+Feel free to contact me via [Email](mailto:me@irtf.xyz).
